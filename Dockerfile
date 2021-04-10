@@ -14,5 +14,5 @@ EXPOSE  8545 8546
 COPY --from=build /root/ /
 ENTRYPOINT ["/usr/bin/geth", "--nousb", "--http.addr", "0.0.0.0", "--http.corsdomain", "*", "--http.vhosts", "*", "--ws.addr", "0.0.0.0", "--ws.origins", "*", "--graphql.addr", "0.0.0.0", "--graphql.corsdomain", "*", "--graphql.vhosts", "*"]
 CMD ["--http", "--ws", "--graphql"]
-HEALTHCHECK --interval=30s --timeout=10s --start-period=120s --retries=10 \
+HEALTHCHECK --interval=30s --timeout=5s --start-period=3600s --retries=4 \
     CMD [ "/bin/sh", "-c", "(/usr/bin/geth attach --exec admin.peers | grep -qve '\[\]') && (/usr/bin/geth attach --exec eth.syncing | grep -q false)" ]
