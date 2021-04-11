@@ -1,4 +1,4 @@
-version: "3.3"
+version: "3.4"
 services:
   geth:
     build: .
@@ -6,4 +6,4 @@ services:
       - 8545:8545
       - 8546:8546
       - 8547:8547
-    command: --syncmode light --http --ws --graphql
+      - 30303:3030
