@@ -4,7 +4,7 @@
 
 Features compared to the original [ethereum/client-go](https://github.com/ethereum/go-ethereum):
 
-- Smaller Size (39.5MB instead of 44.3MB)
+- Smaller Size (39.6MB instead of 44.3MB)
 - Health Check
 
 ## Build
@@ -12,6 +12,10 @@ Features compared to the original [ethereum/client-go](https://github.com/ethere
     docker-compose build
 
 Now, your local image is created with image name `geth_geth`. If you want to use my image from dockerhub, just use `mwaeckerlin/geth`.
+
+## Run
+
+    docker-compose up
 
 ## Call With Commandline Parameter
 
@@ -25,13 +29,13 @@ Now, your local image is created with image name `geth_geth`. If you want to use
 
 ## Default Parameter
 
-By default, HTTP-, Websocket-RPC and GraphQL server are enabled:
+By default, syncmode is loght and HTTP-RPC and Websocket-RPC server are enabled:
 
-    --http --ws --graphql
+    --syncmode light --http --ws
 
 This can be overwritten by passing parameters as command to entrypoint `geth`, e.g.:
 
-    docker run --rm -it geth_geth --syncmode light --http --ws --graphql
+    docker run --rm -it geth_geth --syncmode fast --http --ws
 
 ## Hard Coded Parameter
 
@@ -45,7 +49,4 @@ Overwrite with `--entrypoint`:
         --http.corsdomain * \
         --http.vhosts * \
         --ws.addr 0.0.0.0 \
-        --ws.origins * \
-        --graphql.addr 0.0.0.0 \
-        --graphql.corsdomain * \
-        --graphql.vhosts *
+        --ws.origins *
