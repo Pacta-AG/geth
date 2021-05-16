@@ -18,4 +18,4 @@ COPY --from=build /root/ /
 ENTRYPOINT ["/usr/bin/geth", "--nousb", "--http.addr", "0.0.0.0", "--http.corsdomain", "*", "--http.vhosts", "*", "--ws.addr", "0.0.0.0", "--ws.origins", "*" ]
 CMD ["--syncmode", "light", "--http", "--ws"]
 HEALTHCHECK --interval=30s --timeout=5s --start-period=12h --retries=4 \
-    CMD [ "/bin/sh" "-c", "/usr/bin/geth attach --exec \"net.peerCount>0 && !eth.syncing && !!eth.getBalance('0x05fe7255e0B475A7300A5A4c35e98943BD3bA960')\" | grep -q true"]
+    CMD /bin/sh -c '/usr/bin/geth attach --exec "net.peerCount>0 && !eth.syncing && !!eth.getBalance('"'"'0x05fe7255e0B475A7300A5A4c35e98943BD3bA960'"'"')" | grep -q true'
